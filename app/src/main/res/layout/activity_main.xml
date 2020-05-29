@@ -87,11 +87,25 @@
         android:id="@+id/edtKickBoxerHeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="439dp"
         android:layout_marginEnd="52dp"
+        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetData"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtKickBoxerSpeed" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnGetData"
+        android:layout_width="141dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="163dp"
+        android:onClick="getData"
+        android:text="Get data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edtKickBoxerHeight"
+        app:layout_constraintTop_toBottomOf="@+id/edtKickBoxerHeight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

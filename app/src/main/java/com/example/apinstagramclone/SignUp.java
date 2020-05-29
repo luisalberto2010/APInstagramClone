@@ -8,8 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
@@ -28,6 +30,7 @@ public class SignUp extends AppCompatActivity {
         edtKickBoxerName=findViewById(R.id.edtKickBoxerName);
         edtKickBoxerSpeed=findViewById(R.id.edtKickBoxerSpeed);
         edtKickBoxerHeight=findViewById(R.id.edtKickBoxerHeight);
+
 
     }
 
@@ -70,6 +73,23 @@ public class SignUp extends AppCompatActivity {
         }catch(Exception e){
         FancyToast.makeText(SignUp.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
     }
+
+    }
+
+    public void getData (View v){
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("KickBoxer");
+        parseQuery.getInBackground("vpt4IUKQYU", new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (object!=null && e==null){
+                    edtKickBoxerName.setText(object.get("name").toString());
+                    edtKickBoxerSpeed.setText(object.get("speed").toString());
+                    edtKickBoxerHeight.setText(object.get("height").toString());
+                    //FancyToast.makeText(SignUp.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                    Toast.makeText(SignUp.this,"Object Successfully Retrieved",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 }
