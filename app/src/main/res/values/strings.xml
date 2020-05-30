@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">APInstagramClone</string>
+    <string name="all_data_at_once">All data at once</string>
 </resources>
