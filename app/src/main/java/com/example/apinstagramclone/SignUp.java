@@ -29,6 +29,7 @@ public class SignUp extends AppCompatActivity {
     private TextView txtAll;
     private Button btnAll;
     private String allKickBoxers;
+    private Button btnTransition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,14 @@ public class SignUp extends AppCompatActivity {
         txtGetData = findViewById(R.id.txtGetData);
         txtAll = findViewById(R.id.txtAll);
         btnAll = findViewById(R.id.btnAll);
+        btnTransition = findViewById(R.id.btnTransition);
+
+        btnTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         txtGetData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +70,8 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 allKickBoxers="";
-                ParseQuery<ParseObject> queryAll = ParseQuery.getQuery("KickBoxer");
+                ParseQuery<ParseObject> queryAll = ParseQuery.getQuery("Boxer");
+                queryAll.whereGreaterThan("punch_speed",200);
                 queryAll.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> objects, ParseException e) {
@@ -142,6 +152,33 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void getDataWithCondition(View v){
+
+    }
+
+    public void createKarateClicked(View v)
+    {
+        try {
+            ParseObject KickBoxer = new ParseObject("Karate");
+            KickBoxer.put("name", edtKickBoxerName.getText().toString());
+            KickBoxer.put("speed", Integer.parseInt(edtKickBoxerSpeed.getText().toString()));
+            KickBoxer.put("height", Integer.parseInt(edtKickBoxerHeight.getText().toString()));
+
+
+            KickBoxer.saveInBackground(new SaveCallback()
+            {
+                @Override
+                public void done(ParseException e)
+                {
+                    if (e == null) {
+                        String message = "Object KickBoxer " + edtKickBoxerName.getText().toString() + " created successfully";
+                        FancyToast.makeText(SignUp.this, message, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                        //Toast.makeText(SignUp.this,"Boxer Object Saved Successfully",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }catch(Exception e){
+            FancyToast.makeText(SignUp.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
+        }
 
     }
 }
