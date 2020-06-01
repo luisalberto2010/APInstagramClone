@@ -2,6 +2,7 @@ package com.example.apinstagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class SignUp extends AppCompatActivity {
     private Button btnAll;
     private String allKickBoxers;
     private Button btnTransition;
+    public Intent intent=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,11 @@ public class SignUp extends AppCompatActivity {
         btnTransition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this,
+                        SignUpLoginActivity.class);
 
+
+                        startActivity(intent);
             }
         });
 
